@@ -40,7 +40,7 @@ jobs:
       trigger: ${{ steps.check.outputs.trigger }}
       no_cache: ${{ steps.check.outputs.no_cache }}
     container:
-      image: ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+      image: ghcr.io/nandikasenitbg/feature-flag-analysis:${{ github.ref_name }}
     steps:
       - name: "Check apt updates"
         id: check
@@ -109,12 +109,12 @@ jobs:
           push: true
           provenance: false
           no-cache: ${{ steps.config.outputs.no_cache }}
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+          cache-from:  type=registry,ref=ghcr.io/nandikasenitbg/feature-flag-analysis:${{ github.ref_name }}
           cache-to: type=inline
           target: builder
           tags: |
-            ghcr.io/${{ github.repository }}:${{ github.ref_name }}
-            ghcr.io/${{ github.repository }}:${{ github.ref_name }}-${{ steps.config.outputs.version }}
+                 ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+                 ghcr.io/${{ github.repository }}:${{ github.ref_name }}-${{ steps.config.outputs.version }}
           labels: |
             org.opencontainers.image.authors=${{ github.event.repository.owner.html_url }}
             org.opencontainers.image.created=${{ steps.config.outputs.created }}
